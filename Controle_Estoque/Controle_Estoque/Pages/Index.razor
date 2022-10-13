@@ -1,0 +1,131 @@
+﻿@page "/"
+@inject HttpClient http
+
+<h1>Cadastro de Produtos</h1>
+
+@if (produtos == null)
+{
+    <p>Carregando...</p>
+}
+else if (!produtos.Any())
+{
+    <p>Ainda não existem produtos cadastrados...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ação</th>
+                <th>Data</th>
+                <th>Nome do Produto</th>
+                <th>Quantidade</th>
+                <th>Selecionar</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in produtos)
+            {
+            <tr>
+                    <td><button @onclick="@(() => Excluir(item))"><i class="oi oi-trash"></i></button></td>
+
+                <td>@item.DataCriacao</td>
+                <td>@item.Descricao</td>
+                <td>@item.Quantidade</td>
+                <td><input type="checkbox" @bind="item.Concluida" />@item.Concluida</td>
+
+              
+                    
+
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
+@if (produtos != null)
+{
+    <div class="form-group">
+        <label>Produtos</label>
+        <input type="Text" placeholder="Informe o nome do produto" @bind="novoProduto" />
+        <input type="Text" placeholder="Informe Quantidade" @bind="novoQuantidade" />
+        <button class="btn btn-primary" @onclick="AdicionarNovoProduto">Cadastrar Produto</button>
+      
+        
+    </div>
+}
+
+
+@code{
+
+    protected override async Task OnInitializedAsync()
+    {
+        produtos = await http.GetJsonAsync<List<Produto>>("wwwroot/dados/item.json");
+    }
+
+
+
+    public class Produto
+    {
+        public Guid ID { get; set; }
+        public string Descricao { get; set; }
+        public bool Concluida { get; set; }
+        public DateTime DataCriacao { get; set; }
+        public int Quantidade { get; set; }
+        public int TirarQuantidade { get; set; }
+    }
+
+    private string novoProduto;
+    private int novoQuantidade;
+    private int menosQuantidade;
+
+    private List<Produto> produtos = new List<Produto>();
+
+    void AdicionarNovoProduto()
+    {
+        if (!string.IsNullOrWhiteSpace(novoProduto))
+        {
+            produtos.Add(new Produto
+                {
+                    DataCriacao = DateTime.Now,
+                    Descricao = novoProduto,
+                    Quantidade = novoQuantidade,
+            ID = Guid.NewGuid()
+            });
+            novoProduto = "";
+            novoQuantidade= 0;
+
+
+        }
+    }
+
+    private void TirarNumero(Produto produto)
+    {
+        produtos.Remove(produtos.First(x => x.Quantidade == novoQuantidade));
+    }
+
+    private Produto BuscarPorId(Guid id)
+    {
+        foreach (var item in produtos)
+        {
+            if (item.ID == id)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /*private void RemoveProduto(Guid id)
+    {
+        produtos.Remove(produtos.First (x => x.ID == id));
+    }*/
+    
+    private void Excluir(Produto produto)
+    {
+        produtos.Remove(produto);
+    }
+}

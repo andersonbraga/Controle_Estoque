@@ -1,0 +1,23 @@
+[
+  {
+    "id": "f0dcda47-1f23-4538-92e0-a47dcdcc123",
+    "descricao": "Item 1",
+    "concluida": false,
+    "datacriacao": "2019-08-11",
+    "quantidade": 10
+  },
+  {
+    "id": "d21b0f7e-a5a9-45ee-ad9b-eafd911e42fa",
+    "descricao": "Item 2",
+    "concluida": false,
+    "datacriacao": "2019-09-05",
+    "quantidade": 10
+  },
+  {
+    "id": "1313fda-a5a9-45ee-ad9b-eafd911e42fa",
+    "descricao": "Item 3",
+    "concluida": false,
+    "datacriacao": "2019-09-05",
+    "quantidade": 20
+  }
+]
