@@ -1,6 +1,7 @@
-# Projeto Integrador Senac
+# Projeto Integrador Senac: Controle de Estoque
 
-Projeto desenvolvido para matéria projeto integrador do curso Jovem Programador 2022 da instituição Senac Polo Lages/SC. Engoblando as matéria de Programação de Sistemas e Banco de Dados. 
+Projeto desenvolvido para matéria projeto integrador do curso Jovem Programador 2022 da instituição Senac Polo Lages/SC. Englobando as matéria de Programação de Sistemas e Banco de Dados. 
+Sistemas vai ser usado para estoque de uma loja de peça eletrica para caminhões, com funcões de cadastro de peças, pesquisas, edição e relatorios de saidas das peças.
 
 # Como Usa:
 
